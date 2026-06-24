@@ -1,4 +1,4 @@
-Here's the SQL script converted to markdown:
+Here's the complete version with all content (technical explanations and business scenarios) converted to markdown:
 
 ```markdown
 # Day 7: Presentation SQL Queries
@@ -10,6 +10,8 @@ Run these queries against the `day7_data.db` database. Highlight a specific quer
 ## 1. INNER JOIN (Slide 6 & 7)
 
 Shows only customers who have placed an order.
+
+**Business Scenario:** Marketing wants to send a "Thank You" email to all active customers who have successfully made at least one purchase.
 
 ```sql
 SELECT 
@@ -26,6 +28,8 @@ INNER JOIN orders o
 
 Shows all customers, including Daniel, Angela, and Roberto, who will have `NULL` for their order amounts because they haven't bought anything.
 
+**Business Scenario:** The Sales team needs a list of ALL registered customers to identify "cold leads" (those who signed up but have NULL orders) for a re-engagement campaign.
+
 ```sql
 SELECT 
     c.first_name, 
@@ -40,6 +44,8 @@ LEFT JOIN orders o
 ## 3. Three-Table JOIN (Slide 10)
 
 Connects Customers, Orders, and Products to show **WHO** bought **WHAT** for **HOW MUCH**.
+
+**Business Scenario:** Finance needs a detailed transaction log showing exactly which customer purchased which product to audit the total revenue per transaction.
 
 ```sql
 SELECT 
@@ -59,6 +65,8 @@ INNER JOIN products p
 ## 4. Adding Filters to JOINs (Slide 11)
 
 Takes the 3-table join and adds `WHERE` and `ORDER BY` clauses to filter for Electronics and sort by highest amount.
+
+**Business Scenario:** The Category Manager for "Electronics" wants a prioritized list of their top buyers to offer them VIP early access to upcoming tech releases.
 
 ```sql
 SELECT 
@@ -81,6 +89,8 @@ ORDER BY o.total_amount DESC;
 
 Finds all NCR Electronics orders with customer name, product name, amount, and shipping status. Uses `LEFT JOIN` and `COALESCE` to handle missing shipping info.
 
+**Business Scenario:** Logistics and Customer Service need a consolidated dashboard for all high-value "Electronics" orders in the "NCR" region to proactively track delivery statuses and easily answer customer "Where is my order?" inquiries.
+
 ```sql
 SELECT 
     c.first_name, 
@@ -97,5 +107,4 @@ LEFT JOIN shipping s
 WHERE c.region = 'NCR' 
   AND p.category = 'Electronics'
 ORDER BY o.total_amount DESC;
-```
 ```
